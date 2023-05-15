@@ -6,7 +6,7 @@ Based on discussions at [HTML Modules](https://github.com/WICG/webcomponents/iss
 
 ```html
 <!-- index.html -->
-<script type="module" src="../../html-module.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/html-modul"></script>
 
 <!-- import via link, runs scripts in HTML module -->
 <link import rel="preload" href="./counter.html" as="fetch" crossorigin>
