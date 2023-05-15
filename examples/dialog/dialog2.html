@@ -1,0 +1,25 @@
+
+<style>
+  #dialog2 {
+    background-color: #DFD;
+    max-width: 28em;
+    border-radius: 0.5em;
+    text-align: center;
+    font-family: system-ui, sans-serif;
+  }
+
+  #dialog2 h3 {
+    margin-top: 0;
+  }
+</style>
+
+<dialog id="dialog2">
+	<h3>Dialog 2</h3>
+	<p>
+    This is dialog 2, also implemented as a self-contained HTML module included
+    from dialog 1.
+  </p>
+	<button class="close">Close</button>
+</dialog>
+
+<script export="default" src="dialog2.js" type="module"></script>

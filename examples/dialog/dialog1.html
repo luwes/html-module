@@ -1,0 +1,29 @@
+
+<link export="dialog2" rel="preload" href="./dialog2.html" as="fetch" crossorigin>
+
+<script export="default" type="module" src="dialog1.js"></script>
+
+<style>
+  #dialog1 {
+    background-color: #DDF;
+    max-width: 30em;
+    border-radius: 1em;
+    text-align: center;
+    font-family: system-ui, sans-serif;
+  }
+
+  #dialog1 h2 {
+    margin-top: 0;
+  }
+</style>
+
+<dialog id="dialog1">
+	<h2>Dialog 1</h2>
+	<p>
+    This is dialog 1, implemented entirely via a standalone HTML module.
+    The module includes the markup, JavaScript logic and CSS styles for the dialog,
+    and loads Dialog 2 as a sub-module.
+  </p>
+	<button class="dialog2">Open dialog 2</button>
+  <button class="close">Close</button>
+</dialog>

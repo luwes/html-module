@@ -1,0 +1,23 @@
+<!doctype html>
+
+<title>HTML Module Dialogs</title>
+
+<script type="module" src="../../html-module.js"></script>
+<link rel="preload" href="./dialog1.html" as="fetch" crossorigin>
+
+<body>
+
+<h2>HTML Module Dialogs</h2>
+
+<script type="module">
+  import { importHTMLModule } from '../../html-module.js';
+  const dialogModule = await importHTMLModule('./dialog1.html');
+  console.log(dialogModule);
+
+  document.body.append(
+    dialogModule.document.querySelector('style'),
+    dialogModule.document.querySelector('dialog')
+  );
+
+  dialogModule.default.show();
+</script>

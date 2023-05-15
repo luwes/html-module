@@ -1,0 +1,66 @@
+<script type="module">
+  const htmlModule = globalThis.getCurrentHtmlModule(import.meta.url);
+  const currentDocument = htmlModule.document ?? document;
+
+  const template = currentDocument.querySelector('template');
+
+  export const name = 'w-counter';
+
+  class WCounter extends HTMLElement {
+    static observedAttributes = ['count'];
+
+    constructor() {
+      super();
+
+      if (!this.shadowRoot) {
+        this.attachShadow({ mode: 'open' });
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
+      }
+
+      this.shadowRoot.addEventListener('click', (e) => {
+        if (e.target.textContent === '+') this.increase();
+        else if (e.target.textContent === '-') this.decrease();
+      });
+    }
+
+    attributeChangedCallback() {
+      const div = this.shadowRoot.querySelector('div');
+      div.className = `c${this.count}`;
+      div.textContent = this.count;
+    }
+
+    get count() { return +this.getAttribute('count'); }
+    set count(val) { this.setAttribute('count', `${+val}`); }
+
+    increase = () => (this.count++);
+    decrease = () => (this.count--);
+  }
+
+  customElements.define(name, WCounter);
+
+  export default WCounter;
+</script>
+
+<template>
+  <style>
+    :host {
+      display: flex;
+      gap: 1rem;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    button {
+      padding: 1rem;
+    }
+  </style>
+
+  <button>+</button>
+  <div class="c0">0</div>
+  <button>-</button>
+</template>
