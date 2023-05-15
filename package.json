@@ -1,5 +1,5 @@
 {
-  "name": "html-module",
+  "name": "html-modul",
   "version": "0.1.0",
   "description": "Implementation of how native HTML modules could work.",
   "type": "module",
