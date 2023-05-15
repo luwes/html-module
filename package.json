@@ -1,7 +1,7 @@
 {
   "name": "html-module",
   "version": "0.1.0",
-  "description": "",
+  "description": "Implementation of how native HTML modules could work.",
   "type": "module",
   "main": "html-module.js",
   "files": [],
