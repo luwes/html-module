@@ -59,8 +59,8 @@ async function processRequestQueue(moduleInfo) {
       }
     }
 
-    // Create an ESM module from the inline script elements and add
-    // the document on the import.meta.document property.
+    // Create an ESM module from the inline script elements and
+    // save the script url to module map entry.
     for (let submodule of doc.querySelectorAll('link[export],script[type="module"]')) {
       const isScript = submodule.localName === 'script';
 
