@@ -51,7 +51,7 @@ async function processRequestQueue(moduleInfo) {
     const doc = new DOMParser().parseFromString(html, 'text/html');
     htmlModule.document = doc;
 
-    for (let submodule of doc.querySelectorAll('link[rel="preload"],script[src]')) {
+    for (let submodule of doc.querySelectorAll('link[rel="preload"],script[type="module"][src]')) {
       if (submodule.rel) {
         document.head.append(submodule.cloneNode(true));
       } else {
@@ -61,10 +61,20 @@ async function processRequestQueue(moduleInfo) {
 
     // Create an ESM module from the inline script elements and
     // save the script url to module map entry.
-    for (let submodule of doc.querySelectorAll('link[export],script[type="module"]')) {
+    for (let submodule of doc.querySelectorAll('link[import],link[export],script')) {
       const isScript = submodule.localName === 'script';
-
       let src = submodule.src ?? submodule.href;
+
+      // Classic script tag
+      if (isScript && !submodule.type) {
+        if (src) {
+          await addScript(src);
+        } else {
+          addInlineScript(submodule.textContent);
+        }
+        continue;
+      }
+
       if (!src) {
         const scriptBlob = new Blob(
           [ replaceImport(submodule.textContent, baseUrl) ],
@@ -101,6 +111,22 @@ function modulePreload(url) {
   preloadLink.href = url;
   preloadLink.rel = 'modulepreload';
   document.head.append(preloadLink);
+}
+
+function addScript(src) {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.onload = resolve;
+    script.onerror = reject;
+    script.src = src;
+    document.head.appendChild(script);
+  });
+}
+
+function addInlineScript(textContent) {
+  const script = document.createElement('script');
+  script.textContent = textContent;
+  document.head.appendChild(script);
 }
 
 function replaceImport(code, baseUrl) {
