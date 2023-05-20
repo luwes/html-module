@@ -13,6 +13,7 @@
     "url": "https://github.com/luwes/html-module/issues"
   },
   "scripts": {
+    "lint": "npx eslint *.js -c ./node_modules/wet-run/.eslintrc.json",
     "dev": "wet serve --cors --redirect :examples/"
   },
   "keywords": [
@@ -20,6 +21,6 @@
     "module"
   ],
   "devDependencies": {
-    "wet-run": "^0.1.0"
+    "wet-run": "^0.2.0"
   }
 }
