@@ -1,0 +1,40 @@
+<script type="module">
+  const htmlModule = globalThis.getCurrentHtmlModule(import.meta.url);
+  const currentDocument = htmlModule.document ?? document;
+
+  const template = currentDocument.querySelector('template');
+
+  class WHello extends HTMLElement {
+    constructor() {
+      super();
+
+      if (!this.shadowRoot) {
+        this.attachShadow({ mode: 'open' });
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
+      }
+    }
+  }
+
+  customElements.define('w-hello', WHello);
+</script>
+
+<template>
+  <style>
+    h1 {
+      color: aqua;
+    }
+
+    button {
+      background-color: aquamarine;
+    }
+  </style>
+
+  <h1>Hello Example</h1>
+  <button onclick="hello()">Say Hello</button>
+
+  <script>
+    function hello() {
+      alert("Hello");
+    }
+  </script>
+</template>
