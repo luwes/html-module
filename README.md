@@ -1,5 +1,8 @@
 # HTML Module
 
+**npm**: `npm i html-modul`  
+**cdn**: https://cdn.jsdelivr.net/npm/html-modul
+
 Implementation of how native HTML modules could work.
 Based on discussions at [HTML Modules](https://github.com/WICG/webcomponents/issues/645).
 
