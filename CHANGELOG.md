@@ -1,3 +1,17 @@
+# [0.3.0](https://github.com/luwes/html-module/compare/v0.2.0...v0.3.0) (2023-05-21)
+
+
+### Bug Fixes
+
+* use append() ([41668b8](https://github.com/luwes/html-module/commit/41668b8e0cb991531a330163e00274179be685bd))
+
+
+### Features
+
+* improve syntax, less overloading elements ([edfa991](https://github.com/luwes/html-module/commit/edfa99127c7f7f9400edf839349fe2525c4084f2))
+
+
+
 # 0.2.0 (2023-05-21)
 
 
