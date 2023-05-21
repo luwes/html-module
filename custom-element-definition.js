@@ -1,8 +1,10 @@
 
 import { importHTMLModule } from './html-module.js';
 
-const ceDefinitions = document.querySelectorAll('link[rel="preload"][definition]');
-const modulePromises = [...ceDefinitions].map(link => importHTMLModule(link.href));
+const ceDefinitions = document.querySelectorAll('definition');
+const modulePromises = [...ceDefinitions].map(def => {
+  return importHTMLModule(def.getAttribute('src'));
+});
 
 Promise.all(modulePromises).then(modules => {
 
@@ -14,12 +16,12 @@ Promise.all(modulePromises).then(modules => {
       ...mod.document.body.childNodes,
     );
 
-    const name = ceDefinitions[i].getAttribute('definition');
+    const name = ceDefinitions[i].getAttribute('name');
     if (name) {
 
       if (!customElements.get(name)) {
-        customElements.define(name, class extends HTMLElement {
-          static observedAttributes = mod.observedAttributes;
+        customElements.define(name, class extends (mod.default ?? HTMLElement) {
+          static observedAttributes = super.observedAttributes;
 
           constructor() {
             super();
@@ -31,15 +33,15 @@ Promise.all(modulePromises).then(modules => {
           }
 
           connectedCallback() {
-            mod.connectedCallback?.();
+            super.connectedCallback?.();
           }
 
           disconnectedCallback() {
-            mod.disconnectedCallback?.();
+            super.disconnectedCallback?.();
           }
 
           attributeChangedCallback(name, oldVal, newVal) {
-            mod.attributeChangedCallback?.(name, oldVal, newVal);
+            super.attributeChangedCallback?.(name, oldVal, newVal);
           }
         });
       }

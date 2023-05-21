@@ -14,7 +14,7 @@ export function getCurrentHtmlModule(scriptUrl) {
 }
 
 export async function importHTMLModules(doc) {
-  doc.querySelectorAll('link[rel="preload"]:is([import],[export])')
+  doc.querySelectorAll('link[rel="html-module"]')
     .forEach(link => importHTMLModule(link.href));
 }
 
@@ -61,7 +61,7 @@ async function processRequestQueue(moduleInfo) {
 
     // Create an ESM module from the inline script elements and
     // save the script url to module map entry.
-    for (let submodule of doc.querySelectorAll('link[import],link[export],script')) {
+    for (let submodule of doc.querySelectorAll('link[rel="html-module"],script')) {
       const isScript = submodule.localName === 'script';
       let src = submodule.src ?? submodule.href;
 
