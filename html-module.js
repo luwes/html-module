@@ -14,7 +14,7 @@ export function getCurrentHtmlModule(scriptUrl) {
 }
 
 export async function importHTMLModules(doc) {
-  doc.querySelectorAll('link[import],link[export]')
+  doc.querySelectorAll('link[rel="preload"]:is([import],[export])')
     .forEach(link => importHTMLModule(link.href));
 }
 
@@ -68,7 +68,7 @@ async function processRequestQueue(moduleInfo) {
       // Classic script tag
       if (isScript && !submodule.type) {
         if (src) {
-          await addScript(src);
+          await loadScript(src);
         } else {
           addInlineScript(submodule.textContent);
         }
@@ -113,7 +113,7 @@ function modulePreload(url) {
   document.head.append(preloadLink);
 }
 
-function addScript(src) {
+function loadScript(src) {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
     script.onload = resolve;

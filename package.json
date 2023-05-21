@@ -4,7 +4,9 @@
   "description": "Implementation of how native HTML modules could work.",
   "type": "module",
   "main": "html-module.js",
-  "files": [],
+  "files": [
+    "custom-element-definition.js"
+  ],
   "repository": "luwes/html-module",
   "author": "Wesley Luyten <me@wesleyluyten.com> (https://wesleyluyten.com)",
   "license": "MIT",

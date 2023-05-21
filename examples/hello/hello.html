@@ -1,40 +1,35 @@
-<script type="module">
-  const htmlModule = globalThis.getCurrentHtmlModule(import.meta.url);
-  const currentDocument = htmlModule.document ?? document;
+<script type="module" export="default">
 
-  const template = currentDocument.querySelector('template');
+  export const observedAttributes = ['title'];
 
-  class WHello extends HTMLElement {
-    constructor() {
-      super();
-
-      if (!this.shadowRoot) {
-        this.attachShadow({ mode: 'open' });
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
-      }
-    }
+  export function connectedCallback() {
+    console.log('connected');
   }
 
-  customElements.define('w-hello', WHello);
+  export function disconnectedCallback() {
+    console.log('disconnected');
+  }
+
+  export function attributeChangedCallback(name) {
+    console.log(name, 'attribute changed');
+  }
 </script>
 
-<template>
-  <style>
-    h1 {
-      color: aqua;
-    }
+<script>
+  function hello() {
+    alert('Hello');
+  }
+</script>
 
-    button {
-      background-color: aquamarine;
-    }
-  </style>
+<style>
+  h1 {
+    color: aqua;
+  }
 
-  <h1>Hello Example</h1>
-  <button onclick="hello()">Say Hello</button>
+  button {
+    background-color: aquamarine;
+  }
+</style>
 
-  <script>
-    function hello() {
-      alert("Hello");
-    }
-  </script>
-</template>
+<h1>Hello Example</h1>
+<button onclick="hello()">Say Hello</button>
