@@ -12,7 +12,8 @@ Based on discussions at [HTML Modules](https://github.com/WICG/webcomponents/iss
 <script type="module" src="https://cdn.jsdelivr.net/npm/html-modul"></script>
 
 <!-- import via link, runs scripts in HTML module -->
-<link import rel="preload" href="./counter.html" as="fetch" crossorigin>
+<link rel="preload" href="./counter.html" as="fetch" crossorigin>
+<link rel="html-module" href="./counter.html">
 
 <!-- OR -->
 
