@@ -10,7 +10,7 @@ const Dialog2 = htmlModule.dialog2.default;
 // When the dialog is closed, append it back to the original document. This
 // removes it from the main document so it does not clutter up its DOM.
 dialogElem.addEventListener('close', () => {
-	currentDocument.body.appendChild(dialogElem);
+	currentDocument.body.append(dialogElem);
 });
 
 // Handle open and close buttons.
@@ -26,7 +26,7 @@ export default class Dialog1 {
 		// Dialogs can't be shown unless they are in the main document, so transfer
 		// the <dialog> tag to the main document before calling showModal().
 		// It's transferred back in the 'close' event.
-		document.body.appendChild(dialogElem);
+		document.body.append(dialogElem);
 		dialogElem.showModal();
 	}
 	

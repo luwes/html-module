@@ -119,14 +119,14 @@ function loadScript(src) {
     script.onload = resolve;
     script.onerror = reject;
     script.src = src;
-    document.head.appendChild(script);
+    document.head.append(script);
   });
 }
 
 function addInlineScript(textContent) {
   const script = document.createElement('script');
   script.textContent = textContent;
-  document.head.appendChild(script);
+  document.head.append(script);
 }
 
 function replaceImport(code, baseUrl) {
